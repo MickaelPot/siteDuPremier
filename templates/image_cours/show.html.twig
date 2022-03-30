@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ImageCours{% endblock %}
+
+{% block body %}
+    <h1>ImageCours</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ image_cour.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ image_cour.nom }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ image_cour.contenu }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_image_cours_index') }}">back to list</a>
+
+    <a href="{{ path('app_image_cours_edit', {'id': image_cour.id}) }}">edit</a>
+
+    {{ include('image_cours/_delete_form.html.twig') }}
+{% endblock %}

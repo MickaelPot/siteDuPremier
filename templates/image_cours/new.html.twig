@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ImageCours{% endblock %}
+
+{% block body %}
+    <h1>Create new ImageCours</h1>
+
+    {{ include('image_cours/_form.html.twig') }}
+
+    <a href="{{ path('app_image_cours_index') }}">back to list</a>
+{% endblock %}

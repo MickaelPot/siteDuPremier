@@ -49,7 +49,7 @@ class UserAuthentificationAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        Return new RedirectResponse($this->urlGenerator->generate('/'));
+        Return new RedirectResponse($this->urlGenerator->generate('app_attente_mail'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

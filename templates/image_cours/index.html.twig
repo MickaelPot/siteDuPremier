@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ImageCours index{% endblock %}
+
+{% block body %}
+    <h1>ImageCours index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Contenu</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for image_cour in image_cours %}
+            <tr>
+                <td>{{ image_cour.id }}</td>
+                <td>{{ image_cour.nom }}</td>
+                <td>{{ image_cour.contenu }}</td>
+                <td>
+                    <a href="{{ path('app_image_cours_show', {'id': image_cour.id}) }}">show</a>
+                    <a href="{{ path('app_image_cours_edit', {'id': image_cour.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_image_cours_new') }}">Create new</a>
+{% endblock %}

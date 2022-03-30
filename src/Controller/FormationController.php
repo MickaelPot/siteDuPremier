@@ -33,16 +33,19 @@ class FormationController extends AbstractController
     {
 
         $maVar= $repository->findAll();
-        //DD($maVar);
 
         $formation = new Formation();
 
-        //DD($formation);
+       
 
+        $user = $this->getUser();
         $form = $this->createForm(FormationType::class, $formation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $formation->setAuteur($user);
+            //DD($formation);
+
             $formationRepository->add($formation);
             return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -88,4 +91,5 @@ class FormationController extends AbstractController
 
         return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }
