@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formations{% endblock %}
+
+{% block body %}
+<div class="cours">
+
+
+
+    {% if formation != null %}
+    {% set utilisateur = "" %}
+    {% set lang = "" %}
+
+    {% for user in users %}
+    {% if user == formation.auteur %}
+    {% set utilisateur = user %}
+    {% endif %}
+    {% endfor %}
+
+    {% for langage in langages %}
+    {% if langage == formation.langage %}
+    {% set lang = langage.nom %}
+    {% endif %}
+    {% endfor %}
+
+    <h1 class="titrePage"><span>[{{ lang }}]</span> <br>{{ formation.titre }}</h1>
+    <h3> {{ formation.chapeau }}</h3>
+    <div class="imgArticle">
+        <img src={{ formation.image }} alt="">
+    </div>
+    <div class="resume">{{ formation.resume }}</div>
+
+
+    <div class="auteur"><span>Par : {{ utilisateur.pseudo }}</span> </div>
+    {{ formation.corps | raw }}
+   
+
+    {% if app.user== formation.auteur %}
+    <a href="{{ path('app_formation_edit', {id:formation.id})}}">modifier le cours</a>
+    <a href="{{ path('app_formation_delete', {id:formation.id})}}">supprimer le cours</a>
+    {% elseif app.user.roles|length == 1 %}
+
+
+    <a href="{{ path('app_formation_signalement', {id:formation.id})}}">signalement</a>
+    {% endif %}
+
+
+    {% else %}
+    <div> Ce cours n\'existe pas </div>
+    {% endif %}
+
+    <div class="administrateur">
+        {% for role in app.user.roles %}
+        {% if role == "ROLE_ADMIN" %}
+        <a href="{{ path('app_formation_nonsignalement', {id:formation.id})}}">valider</a>
+        <a href="{{ path('app_formation_suppression', {id:formation.id})}}">supprimer</a>
+        {% endif %}
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

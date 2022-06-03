@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Site du Premier{% endblock %}</title>
+    <!-- Feuille de style Matteo -->
+    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
@@ -11,8 +14,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 
-    <!-- Feuille de style Matteo -->
-    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+    
 
 
     <link rel="stylesheet" href="../public/assets/css/font-awesome.css" rel="stylesheet">
@@ -26,17 +28,18 @@
     <link href="http://fonts.googleapis.com/css?family=PT+Sans" type="text/css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet" type="text/css">
     <link rel="icon"
-          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
     {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('app') }}
     {% endblock %}
 
     {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('app') }}
     {% endblock %}
 
-    
+
 </head>
 
 <body>
@@ -48,52 +51,64 @@
                         <img src="/assets/img/nom_orange.png" alt="">
                     </a>
                 </li>
-    
+
                 <li class="formationsListe">
-                    <span class="fa-code">Nos formations</span>
+                    <a href="{{ path('app_formation_browse') }}">
+                        <span class="fa-code">Nos formations</span>
+                    </a>
                     <ul>
                         {% for unLangage in langages %}
-                            <li class="parent">
+                        <li class="parent">
+                            <a href="{{ path('app_formation_browse_langage', { name: unLangage.nom }) }}">
                                 <span>{{ unLangage.nom }}</span>
-                            </li>
+                            </a>
+                        </li>
                         {% endfor %}
+                        {% if app.user %}
+                        <li class="parent">
+                            <a href="{{ path('app_formation_new') }}">
+                                <span>Ajouter une formation</span>
+                            </a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </li>
-    
+
                 <li>
                     <a href="index.html">Qui sommes-nous ?</a>
                 </li>
-    
+
                 <li class="headerSearch">
                     <input type="text" name="" id="rechercheFormation" placeholder="Rechercher">
                     <button type="submit">
                         <img src="/assets/img/loupe_noire.png" alt="">
                     </button>
                 </li>
-    
-    
+                <div class="afficheResultat" id="resultat"></div>
+
+
                 <li class="headerConnexion">
                     {% if app.user %}
-                        <a href="">Mon compte</a>
-                        <a href="{{ path('app_logout') }}">Se deconnecter</a>
+                    <a href="{{ path('app_compte') }}">Mon compte</a>
+                    <a href="{{ path('app_logout') }}">Se deconnecter</a>
                     {% else %}
-                        <a href="{{ path('app_login') }}">Connexion</a>
+                    <a href="{{ path('app_login') }}">Connexion</a>
                     {% endif %}
                 </li>
-    
-    
+
+
             </ul>
         </div>
     </header>
-    
+
     {% block body %}{% endblock %}
-    
+
     <footer>
         <div class="bandeauBas">
             <div class="logoBas">
                 <img src="/assets/img/logoBas.png" alt="">
             </div>
-    
+
             <div class="reseaux">
                 <ul>
                     <li class="discord">
@@ -110,7 +125,7 @@
                     </li>
                 </ul>
             </div>
-    
+
             <div class="liensBas">
                 <ul>
                     <li>
@@ -125,8 +140,9 @@
                 </ul>
             </div>
         </div>
-    
+
     </footer>
-    </body>
+    <script src="{{ asset('assets/js/recherche.js') }}"></script>
+</body>
 
 </html>

@@ -24,8 +24,7 @@ class Formation
     #[ORM\JoinColumn(nullable: false)]
     private $auteur;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $image;
+   
 
     #[ORM\Column(type: 'text')]
     private $chapeau;
@@ -36,8 +35,11 @@ class Formation
     #[ORM\Column(type: 'text')]
     private $resume;
 
-    #[ORM\OneToOne(mappedBy: 'formation', targetEntity: ImageCours::class, cascade: ['persist', 'remove'])]
-    private $imageCours;
+    #[ORM\Column(type: 'string', nullable: true)]
+    private $image;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isSignaled;
 
     public function getId(): ?int
     {
@@ -128,20 +130,16 @@ class Formation
         return $this;
     }
 
-    public function getImageCours(): ?ImageCours
+    public function getIsSignaled(): ?bool
     {
-        return $this->imageCours;
+        return $this->isSignaled;
     }
 
-    public function setImageCours(ImageCours $imageCours): self
+    public function setIsSignaled(bool $isSignaled): self
     {
-        // set the owning side of the relation if necessary
-        if ($imageCours->getFormation() !== $this) {
-            $imageCours->setFormation($this);
-        }
-
-        $this->imageCours = $imageCours;
+        $this->isSignaled = $isSignaled;
 
         return $this;
     }
+
 }

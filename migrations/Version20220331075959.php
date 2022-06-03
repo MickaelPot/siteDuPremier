@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220330130741 extends AbstractMigration
+final class Version20220331075959 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,12 +20,12 @@ final class Version20220330130741 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE image_cours ADD image VARCHAR(255) DEFAULT NULL, ADD image_file LONGBLOB DEFAULT NULL, ADD updates_at DATETIME DEFAULT NULL, DROP contenu');
+        $this->addSql('ALTER TABLE formation ADD is_signaled TINYINT(1) NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE image_cours ADD contenu LONGTEXT DEFAULT NULL, DROP image, DROP image_file, DROP updates_at');
+        $this->addSql('ALTER TABLE formation DROP is_signaled');
     }
 }

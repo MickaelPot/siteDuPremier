@@ -3,33 +3,35 @@
 {% block title %}Langage index{% endblock %}
 
 {% block body %}
-    <h1>Langage index</h1>
+    <div class="indexLangage">
+        <h1>Index des langages</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for langage in langages %}
-            <tr>
-                <td>{{ langage.id }}</td>
-                <td>{{ langage.nom }}</td>
-                <td>
-                    <a href="{{ path('app_langage_show', {'id': langage.id}) }}">show</a>
-                    <a href="{{ path('app_langage_edit', {'id': langage.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for langage in langages %}
+                <tr>
+                    <td>{{ langage.id }}</td>
+                    <td>{{ langage.nom }}</td>
+                    <td class="btnModifs">
+                        <a href="{{ path('app_langage_show', {'id': langage.id}) }}">Afficher</a>
+                        <a href="{{ path('app_langage_edit', {'id': langage.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucune entrée trouvée.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_langage_new') }}">Create new</a>
+        <a class='newLangage' href="{{ path('app_langage_new') }}">Créer un nouveau langage</a>
+    </div>
 {% endblock %}

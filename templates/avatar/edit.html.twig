@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}changer le profil{% endblock %}
+
+{% block body %}
+    <h1>Modifie ton profil</h1>
+
+    {{ include('avatar/_form.html.twig', {'button_label': 'changer'}) }}
+
+    <a href="{{ path('app_compte') }}">annuler</a>
+
+{% endblock %}

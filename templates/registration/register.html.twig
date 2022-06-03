@@ -9,27 +9,34 @@
 
 
 
-<section class="container">
-    <div class="row">
-        <div class="col">
-            <h1>Inscription</h1>
+<div class="connexion">
+    <div class="formulaireConnexion">
+        <h1>
+            Inscription
+            <span class="bordureConnexion"></span>
+        </h1>
 
-            {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.pseudo) }}
-            {{ form_row(registrationForm.prenom) }}
-            {{ form_row(registrationForm.nom) }}
+        {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.pseudo) }}
+        {{ form_row(registrationForm.prenom) }}
+        {{ form_row(registrationForm.nom) }}
+        <div class="dateNaissance">
             {{ form_row(registrationForm.date_naissance) }}
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.plainPassword, {
-            label: 'Mot de passe'
-            }) }}
-            {{ form_row(registrationForm.agreeTerms) }}
-
-            <button type="submit" class="btn">Register</button>
-            {{ form_end(registrationForm) }}
         </div>
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Mot de passe'
+        }) }}
+        <div class="agreeTerms">
+            {{ form_row(registrationForm.agreeTerms) }}
+        </div>
+
+        <div class="btnConnexion">
+            <button type="submit" class="btn">S'inscrire</button>
+        </div>
+        {{ form_end(registrationForm) }}
     </div>
-</section>
+</div>
 
 
 

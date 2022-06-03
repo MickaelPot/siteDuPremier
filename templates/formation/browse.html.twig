@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formations{% endblock %}
+
+{% block body %}
+<div class="listeFormations"></div>
+    {% for formation in formations %}
+
+        {% set utilisateur = "" %}
+        {% set lang = "" %}
+
+        {% for user in users %}
+            {% if user == formation.auteur %}
+                {% set utilisateur = user %}
+            {% endif %}
+        {% endfor %}
+
+        {% for langage in langages %}
+            {% if langage == formation.langage %}
+                {% set lang = langage.nom %}
+            {% endif %}
+        {% endfor %}
+        <a class='iterationFormation' href="{{ path('app_formation_cours', { id:formation.id }) }}">
+            <div class="corpsListe">
+                <h2 class="titre">{{ formation.titre }}</h2>
+                <div class="langage">{{ lang }}</div>
+                <div class="resume">{{ formation.resume }}</div>
+                <div class="infos">
+                    <img src={{ formation.image }}>
+                    <div><span>Auteur :</span> {{ utilisateur.nom }} {{ utilisateur.prenom }}</div>
+                </div>
+            </div>
+        </a>
+
+    {% else %}
+       <div> Aucun cours trouvé</div>
+    {% endfor %}
+    
+{% endblock %}

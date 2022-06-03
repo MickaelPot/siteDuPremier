@@ -3,7 +3,7 @@
 {% block title %}Formation index{% endblock %}
 
 {% block body %}
-    <h1>Formation index</h1>
+    <h1>Les formations signalées</h1>
 
     <table class="table">
         <thead>
@@ -15,6 +15,7 @@
         </thead>
         <tbody>
         {% for formation in formations %}
+        {% if formation.isSignaled == 1 %}
             <tr>
                 <td>{{ formation.id }}</td>
                 <td>{{ formation.titre }}</td>
@@ -25,8 +26,9 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Pas de signalement</td>
             </tr>
+        {% endif %}
         {% endfor %}
         </tbody>
     </table>

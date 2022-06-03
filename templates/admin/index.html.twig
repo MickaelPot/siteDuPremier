@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+    <h1>Les formations signalées</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Chapeau</th>
+                <th>Corps</th>
+                <th>Resume</th>
+                <th>Image</th>
+                <th>IsSignaled</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formation in formations %}
+        {% if formation.isSignaled == 1 %}
+            <tr>
+                <td>{{ formation.id }}</td>
+                <td>{{ formation.titre }}</td>
+                <td>{{ formation.chapeau }}</td>
+                <td>{{ formation.corps }}</td>
+                <td>{{ formation.resume }}</td>
+                <td>{{ formation.image }}</td>
+                <td>{{ formation.isSignaled ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_formation_cours', {'id': formation.id}) }}">Afficher la formation</a>
+                </td>
+            </tr>
+            {% elseif formation.isSignaled == 0 %}
+            {% else %}
+
+            <tr>
+                <td colspan="3">Pas de signalement</td>
+            </tr>
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+<div class="afficheCompte">
+
+    <div class="affichageUser">
+        <a href="{{ path('app_avatar_edit')}}">
+            {% if user.photo != null %}
+            <img src={{user.photo}} alt="">
+            {% else %}
+            <img src="/imageavatar/default-avatar.jpg" alt="">
+            {% endif %}
+        </a>
+        <div>
+            <h3>
+                {{user.pseudo}}
+            </h3>
+        </div>
+    </div>
+
+    <div class="aPropos">
+        <h3>A propos de moi</h3>
+        <div class="bio">
+
+            {% if user.biographie != null %}
+            {{user.biographie | raw}}
+
+            {% else %}
+            <p>Biographie à remplir</p>
+            {% endif %}
+            <div class="btnModif">
+                <a href="{{ path('app_biography_edit')}}">Modifier</a>
+            </div>
+        </div>
+    </div>
+    <div class="administrateur">
+        {% for role in user.roles %}
+        {% if role == "ROLE_ADMIN" %}
+        <a href="{{ path('app_admin_index')}}">outils d'administration</a>
+        {% endif %}
+
+        {% endfor %}
+    </div>
+    
+</div>
+
+
+{% endblock %}

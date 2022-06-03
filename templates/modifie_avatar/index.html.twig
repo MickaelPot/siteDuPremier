@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifie ton compte{% endblock %}
+
+{% block body %}
+<h1>Modifier son compte</h1>
+
+    {{ include('/_form.html.twig') }}
+
+    <a href="{{ path('app_compte') }}">Retour à mon compte</a>
+
+{% endblock %}
+
+    

@@ -9,6 +9,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 class FormationType extends AbstractType
 {
@@ -21,12 +23,12 @@ class FormationType extends AbstractType
             'label' => 'langage',
         ])
             ->add('titre')
-            ->add('image')
+            ->add('image', FileType::class, [
+              
+            ])
             ->add('chapeau')
             ->add('corps', CKEditorType::class)
             ->add('resume')
-            
-            //->add('auteur')
         ;
     }
 

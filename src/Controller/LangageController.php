@@ -31,7 +31,7 @@ class LangageController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $langageRepository->add($langage);
-            return $this->redirectToRoute('app_langage_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_formation_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('langage/new.html.twig', [

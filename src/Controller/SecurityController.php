@@ -15,7 +15,7 @@ class SecurityController extends AbstractController
     {
 
         $maVar= $repository->findAll();
-
+        
          if ($this->getUser()) {
              return $this->redirectToRoute('app_index');
          }
